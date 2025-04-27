@@ -1,6 +1,6 @@
 <template>
   <div class="menu-page">
-    <h1>Menu du Restaurant</h1>
+    <h1 class="title">Menu du Restaurant</h1>
 
     <div class="plats-list">
       <PlatItem
@@ -10,7 +10,10 @@
         @ajouter-au-panier="handleAjouterAuPanier"
       >
         <template #extra>
-          <span v-if="plat.prix < 9" class="cheap-badge">Bon plan</span>
+          <span v-if="plat.prix < 9" class="badge--promo">Bon plan</span>
+        </template>
+        <template #image>
+          <img :src="plat.imageUrl" alt="Image du plat" class="plat-img" />
         </template>
       </PlatItem>
     </div>
@@ -27,9 +30,9 @@ import Toast from '@/components/Toast.vue'
 import store from '@/store'
 
 const toastVisible = ref(false)
-const toastMessage = ref("")
+const toastMessage = ref('')
 
-const handleAjouterAuPanier = (plat) => {
+const handleAjouterAuPanier = (plat: any) => {
   store.addToPanier(plat)
   toastMessage.value = `${plat.nom} ajouté au panier !`
   toastVisible.value = true
@@ -41,33 +44,23 @@ const platsList = platsData
 
 <style scoped>
 .menu-page {
-  padding: 6rem 2rem 2rem 2rem; /* Ajout d'un padding top pour compenser la navbar */
-  background-color: #f9fafb;
-  min-height: 100vh;
-  box-sizing: border-box;
+  padding: 6rem 2rem 2rem;
+  background: #f9fafb;
+  min-height: calc(100vh - 6rem);
 }
 
-.menu-page h1 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+.title {
+  font-family: var(--font-title);
+  font-size: 2.25rem;
   text-align: center;
-  color: #1f2937;
+  color: var(--color-dark);
+  margin-bottom: 2rem;
 }
 
 .plats-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.cheap-badge {
-  background-color: #22c55e;
-  color: white;
-  padding: 0.2rem 0.5rem;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  margin-left: 0.5rem;
-  font-weight: bold;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
 }
 
 .plat-img {
@@ -75,6 +68,78 @@ const platsList = platsData
   height: 180px;
   object-fit: cover;
   border-radius: 12px;
+  margin-bottom: 1rem;
+  transition: transform 0.3s;
+}
+.plat-img:hover {
+  transform: scale(1.05);
+}
+
+.badge--promo {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
   margin-bottom: 0.5rem;
+}
+
+/* Ajustements PlatItem */
+.plat-item {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s;
+}
+.plat-item:hover {
+  transform: translateY(-6px);
+}
+
+.plat-content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.plat-content h3 {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+  color: var(--color-dark);
+}
+
+.plat-content .description {
+  color: var(--color-muted);
+  flex: 1;
+  margin: 0.5rem 0 1rem;
+  line-height: 1.4;
+}
+
+.plat-content .prix {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.btn-ajouter {
+  background: var(--color-primary);
+  color: var(--color-dark);
+  border: none;
+  padding: 0.75rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  align-self: flex-start;
+}
+.btn-ajouter:hover {
+  background: #e0b535;
 }
 </style>

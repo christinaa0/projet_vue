@@ -1,14 +1,43 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="fr">
   <head>
     <meta charset="UTF-8">
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vite App</title>
+    <title>EPSEAT - Restaurant en Ligne</title>
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Global CSS Variables -->
+    <style>
+      :root {
+        --color-primary: #f2c94c;
+        --color-dark:    #1f2937;
+        --color-light:   #fafafa;
+        --color-muted:   #737373;
+        --font-title: 'Playfair Display', serif;
+        --font-base:  'Open Sans', sans-serif;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: var(--font-base);
+        background: var(--color-light);
+        color: var(--color-dark);
+        line-height: 1.6;
+      }
+      a { text-decoration: none; color: inherit; }
+      ul { list-style: none; margin: 0; padding: 0; }
+      img { display: block; max-width: 100%; height: auto; }
+    </style>
+  </head>
+
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
-

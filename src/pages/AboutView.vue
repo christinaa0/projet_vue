@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <div class="about-content">
-      <h1>À propos de EPSEAT</h1>
+      <h1></h1>
       <p class="intro">
         EPSEAT est un service de restauration rapide dédié aux étudiants de l'EPSI Paris.
         Nous proposons des plats variés, rapides et à prix abordables pour accompagner
