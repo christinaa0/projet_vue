@@ -1,4 +1,3 @@
-// src/data/plats.js
 export const plats = [
     {
       id: 1,

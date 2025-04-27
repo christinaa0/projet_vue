@@ -1,6 +1,5 @@
 <template>
   <div class="plat-item">
-    <!-- ✅ Slot pour l'image du plat (si fourni) -->
     <slot name="image">
       <img v-if="plat.imageUrl" :src="plat.imageUrl" alt="Image du plat" class="plat-img" />
     </slot>
@@ -12,18 +11,12 @@
       </h3>
       <p class="description">{{ plat.description }}</p>
       <p class="prix">{{ plat.prix.toFixed(2) }} €</p>
-
-      <!-- ✅ Slot extra pour un badge supplémentaire -->
       <slot name="extra"></slot>
-
-      <!-- ✅ Bouton stylisé -->
       <button class="btn-ajouter" @click="ajouterAuPanier">
         Ajouter au panier
       </button>
     </div>
   </div>
-
-  <!-- ✅ Popup Modal -->
   <div v-if="popupVisible" class="popup-overlay" @click="fermerPopup">
     <div class="popup-content" @click.stop>
       <p>Commande ajoutée au panier !</p>
@@ -41,7 +34,7 @@ interface Plat {
   description: string;
   prix: number;
   isNouveau: boolean;
-  imageUrl?: string;  // Optionnel pour l'image
+  imageUrl?: string;
 }
 
 const props = defineProps<{
@@ -52,15 +45,15 @@ const emit = defineEmits<{
   (e: "ajouter-au-panier", plat: Plat): void
 }>()
 
-const popupVisible = ref(false) // État du popup (visible ou non)
+const popupVisible = ref(false)
 
 const ajouterAuPanier = () => {
   emit("ajouter-au-panier", props.plat)
-  popupVisible.value = true // Affiche le popup après l'ajout au panier
+  popupVisible.value = true
 }
 
 const fermerPopup = () => {
-  popupVisible.value = false // Cache le popup
+  popupVisible.value = false
 }
 </script>
 
@@ -75,7 +68,7 @@ const fermerPopup = () => {
   padding: 1.5rem;
   max-width: 320px;
   margin: 1rem auto;
-  height: 450px; /* Fixer la hauteur de chaque carte */
+  height: 450px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid #e2e8f0;
 }
@@ -156,7 +149,6 @@ h3 {
   margin-bottom: 1rem;
 }
 
-/* ✅ Styles pour le popup */
 .popup-overlay {
   position: fixed;
   top: 0;

@@ -1,6 +1,5 @@
 <template>
   <div class="home-view">
-    <!-- Hero sans image, fond dégradé -->
     <section class="hero">
       <div class="hero-content">
         <h1>Bienvenue chez EPSEAT 🍽️</h1>
@@ -9,7 +8,6 @@
       </div>
     </section>
 
-    <!-- Nos atouts -->
     <section class="features">
       <div class="feature-card">
         <div class="icon">🍅</div>
@@ -43,7 +41,7 @@ import { RouterLink } from 'vue-router'
   font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
-/* ==== Hero ==== */
+
 .hero {
   width: 100%;
   height: 70vh;
@@ -87,7 +85,7 @@ import { RouterLink } from 'vue-router'
   transform: translateY(-2px);
 }
 
-/* ==== Features ==== */
+
 .features {
   display: grid;
   gap: 2rem;

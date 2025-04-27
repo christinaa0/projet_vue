@@ -41,8 +41,10 @@ const platsList = platsData
 
 <style scoped>
 .menu-page {
-  padding: 2rem;
+  padding: 6rem 2rem 2rem 2rem; /* Ajout d'un padding top pour compenser la navbar */
   background-color: #f9fafb;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .menu-page h1 {

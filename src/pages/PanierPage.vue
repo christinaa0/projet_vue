@@ -1,8 +1,6 @@
 <template>
   <div class="panier-page">
     <h1>Votre Panier</h1>
-
-    <!-- Affichage du panier -->
     <div v-if="store.state.panier.length > 0">
       <div v-for="item in store.state.panier" :key="item.id" class="panier-item">
         <div class="item-details">
@@ -23,11 +21,9 @@
         <p><strong>Total : </strong>{{ store.getTotal() }}€</p>
       </div>
 
-      <!-- Finalisation de la commande -->
       <button class="finalize-btn" @click="finalizeOrder">Finaliser la commande</button>
     </div>
 
-    <!-- Message si le panier est vide -->
     <div v-else>
       <p>Votre panier est vide.</p>
     </div>
@@ -36,22 +32,19 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import store from '@/store'; // Assurez-vous que le chemin est correct
+import store from '@/store';
 
-// Supprimer un plat du panier
 const removeFromPanier = (id: number) => {
   store.removeFromPanier(id);
 };
 
-// Mettre à jour la quantité d'un plat
 const updateQuantity = (id: number, quantity: number) => {
   store.changeQuantity(id, quantity);
 };
 
-// Finaliser la commande (vider le panier après la commande)
 const finalizeOrder = () => {
   if (window.confirm("Commande validée ! Voulez-vous vraiment finaliser votre commande ?")) {
-    store.clearPanier(); // Vide le panier
+    store.clearPanier();
   }
 };
 </script>
