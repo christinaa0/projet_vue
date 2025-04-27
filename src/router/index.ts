@@ -3,6 +3,7 @@ import HomeView from '../pages/HomeView.vue'
 import MenuPage from '@/pages/MenuPage.vue'
 import PanierPage from '@/pages/PanierPage.vue' // Assurez-vous que le chemin est correct pour PanierPage
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
