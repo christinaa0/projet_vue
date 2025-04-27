@@ -11,12 +11,15 @@ import { RouterLink, RouterView } from 'vue-router'
     <ul class="nav-links">
       <li><RouterLink to="/">Accueil</RouterLink></li>
       <li><RouterLink to="/menu">Menu</RouterLink></li>
+      <li><RouterLink to="/panier">Panier</RouterLink></li>
+      <li><RouterLink to="/admin">Admin</RouterLink></li>
       <li><RouterLink to="/about">À propos</RouterLink></li>
     </ul>
   </header>
 
+  <!-- Titre centré sous la navbar -->
   <div class="main-title">
-
+    <h2>Bienvenue dans notre Restaurant en Ligne</h2>
   </div>
 
   <main class="main-content">
@@ -43,7 +46,7 @@ import { RouterLink, RouterView } from 'vue-router'
   font-size: 1.8rem;
   font-weight: bold;
   color: #facc15;
-  flex: 1; /* Prend l'espace à gauche */
+  flex: 1; /* Prend tout l'espace à gauche */
 }
 
 .nav-links {
@@ -66,6 +69,7 @@ import { RouterLink, RouterView } from 'vue-router'
   text-decoration: underline;
 }
 
+/* Titre principal centré */
 .main-title {
   text-align: center;
   margin: 3rem 0 1rem;
@@ -77,8 +81,9 @@ import { RouterLink, RouterView } from 'vue-router'
   font-weight: 700;
 }
 
+/* Pour éviter que le contenu passe sous la navbar */
 .main-content {
-  padding-top: 100px;
+  padding-top: 100px; /* Ajuster si ta navbar est plus haute */
   padding-left: 2rem;
   padding-right: 2rem;
   padding-bottom: 2rem;
