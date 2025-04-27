@@ -30,12 +30,12 @@
 .about {
   min-height: 100vh;
   display: flex;
-  justify-content: center; /* Centrer horizontalement */
-  align-items: flex-start;     /* Assure que l'élément est bien positionné dans le sens vertical */
+  justify-content: center;
+  align-items: flex-start;
   padding: 2rem;
   background-color: #f9f9f9;
   text-align: center;
-  width: 100%; /* Assure que la largeur prend tout l'espace disponible */
+  width: 100%;
 }
 
 .about-content {
@@ -43,7 +43,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centrer les enfants */
+  align-items: center;
   padding: 2rem;
 }
 
@@ -77,15 +77,13 @@
   color: #555;
 }
 
-/* Responsive : à partir de 768px */
 @media (min-width: 768px) {
   .features {
     grid-template-columns: repeat(3, 1fr);
-    justify-items: center; /* Centrer les éléments dans la grille */
+    justify-items: center;
   }
 }
 
-/* Responsive : à partir de 1024px */
 @media (min-width: 1024px) {
   .about-content {
     padding: 3rem;

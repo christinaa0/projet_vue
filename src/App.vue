@@ -26,14 +26,12 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <style scoped>
-/* Global layout */
 .app {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -99,22 +97,21 @@ import { RouterLink } from 'vue-router'
   }
 }
 
-/* Main content */
 .app-content {
-  padding-top: 4rem; /* Assure que le contenu est sous la navbar */
+  padding-top: 4rem;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centre horizontalement */
-  align-items: center; /* Centre verticalement */
-  min-height: calc(100vh - 4rem); /* Utilise toute la hauteur de la fenêtre sous la navbar */
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 4rem);
   width: 100%;
-  box-sizing: border-box; /* Assure que le padding ne dépasse pas de la fenêtre */
+  box-sizing: border-box;
   overflow-x: hidden;
 }
 
 @media (max-width: 768px) {
   .app-content {
-    padding-top: 6rem; /* Augmente le padding si nécessaire sur les petits écrans */
+    padding-top: 6rem;
   }
 }
 </style>

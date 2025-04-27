@@ -1,11 +1,10 @@
 <template>
   <div class="panier-page">
-    <h1>Votre Panier</h1>
-    <div v-if="store.state.panier.length > 0">
-      <div v-for="item in store.state.panier" :key="item.id" class="panier-item">
-        <div class="item-details">
-          <img :src="item.imageUrl" alt="Image Plat" class="item-image" />
-          <div class="item-info">
+    <div class="panier-container">
+      <h1>Votre Panier</h1>
+      <div v-if="store.state.panier.length > 0">
+        <div v-for="item in store.state.panier" :key="item.id" class="panier-item">
+          <div class="item-left">
             <p class="item-name">{{ item.nom }}</p>
             <p class="item-price">{{ item.prix }}€</p>
             <div class="item-quantity">
@@ -13,25 +12,24 @@
               <input type="number" v-model.number="item.quantity" @change="updateQuantity(item.id, item.quantity)" min="1" />
             </div>
           </div>
+          <button class="remove-btn" @click="removeFromPanier(item.id)">Supprimer</button>
         </div>
-        <button class="remove-btn" @click="removeFromPanier(item.id)">Supprimer</button>
+
+        <div class="total">
+          <p><strong>Total : </strong>{{ store.getTotal() }}€</p>
+        </div>
+
+        <button class="finalize-btn" @click="finalizeOrder">Finaliser la commande</button>
       </div>
 
-      <div class="total">
-        <p><strong>Total : </strong>{{ store.getTotal() }}€</p>
+      <div v-else>
+        <p>Votre panier est vide.</p>
       </div>
-
-      <button class="finalize-btn" @click="finalizeOrder">Finaliser la commande</button>
-    </div>
-
-    <div v-else>
-      <p>Votre panier est vide.</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import store from '@/store';
 
 const removeFromPanier = (id: number) => {
@@ -51,12 +49,25 @@ const finalizeOrder = () => {
 
 <style scoped>
 .panier-page {
-  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 6rem;
   background-color: #f9fafb;
   font-family: 'Arial', sans-serif;
 }
 
-.panier-page h1 {
+.panier-container {
+  width: 100%;
+  max-width: 900px;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
   font-size: 2rem;
   margin-bottom: 2rem;
   text-align: center;
@@ -67,32 +78,18 @@ const finalizeOrder = () => {
 .panier-item {
   display: flex;
   justify-content: space-between;
-  background-color: #fff;
+  align-items: center;
+  background-color: #fefefe;
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  flex-wrap: wrap;
 }
 
-.panier-item:hover {
-  transform: translateY(-5px);
-}
-
-.item-details {
+.item-left {
   display: flex;
-  align-items: center;
-}
-
-.item-image {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-right: 1rem;
-}
-
-.item-info {
+  flex-direction: column;
   flex: 1;
 }
 
@@ -111,6 +108,7 @@ const finalizeOrder = () => {
 .item-quantity {
   display: flex;
   align-items: center;
+  margin-top: 0.5rem;
 }
 
 .item-quantity label {
@@ -119,7 +117,7 @@ const finalizeOrder = () => {
 }
 
 input[type="number"] {
-  width: 60px;
+  width: 70px;
   padding: 0.5rem;
   font-size: 1rem;
   border-radius: 8px;
@@ -134,11 +132,12 @@ input[type="number"]:focus {
 .remove-btn {
   background-color: #f44336;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.5rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-top: 0.5rem;
 }
 
 .remove-btn:hover {
@@ -155,16 +154,37 @@ input[type="number"]:focus {
 .finalize-btn {
   background-color: #4CAF50;
   color: white;
-  padding: 0.8rem 1.5rem;
+  padding: 1rem 1.5rem;
   font-size: 1.2rem;
   border-radius: 8px;
   border: none;
   width: 100%;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-top: 2rem;
 }
 
 .finalize-btn:hover {
   background-color: #388e3c;
+}
+
+@media (max-width: 768px) {
+  .panier-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .remove-btn {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .total {
+    text-align: center;
+  }
+
+  .finalize-btn {
+    font-size: 1rem;
+  }
 }
 </style>

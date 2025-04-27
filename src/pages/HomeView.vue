@@ -8,23 +8,7 @@
       </div>
     </section>
 
-    <section class="features">
-      <div class="feature-card">
-        <div class="icon">🍅</div>
-        <h3>Fraîcheur</h3>
-        <p>Ingrédients de saison, chaque jour.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">⚡</div>
-        <h3>Rapidité</h3>
-        <p>Préparation express pour vos envies pressées.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🚚</div>
-        <h3>Livraison</h3>
-        <p>Arrivée chez vous en moins de 30 minutes.</p>
-      </div>
-    </section>
+
   </div>
 </template>
 
