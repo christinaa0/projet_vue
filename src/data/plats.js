@@ -7,7 +7,7 @@ export const plats = [
       prix: 7.5,
       isNouveau: true
     },
-   
+
     {
       id: 3,
       nom: "Salade César",
@@ -65,4 +65,3 @@ export const plats = [
       isNouveau: false
     }
   ];
-  

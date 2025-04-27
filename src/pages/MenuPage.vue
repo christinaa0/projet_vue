@@ -1,10 +1,7 @@
 <template>
-
-  
   <div class="menu-page">
     <h1>Menu du Restaurant</h1>
-    
-   
+
     <div class="plats-list">
       <PlatItem
         v-for="plat in platsList"
@@ -12,12 +9,9 @@
         :plat="plat"
         @ajouter-au-panier="handleAjouterAuPanier"
       >
-     
         <template #extra>
           <span v-if="plat.prix < 9" class="cheap-badge">Bon plan</span>
         </template>
-        
-    
       </PlatItem>
     </div>
 
@@ -30,13 +24,13 @@ import { ref } from 'vue'
 import { plats as platsData } from '@/data/plats'
 import PlatItem from '@/components/PlatItem.vue'
 import Toast from '@/components/Toast.vue'
-
+import store from '@/store'
 
 const toastVisible = ref(false)
 const toastMessage = ref("")
 
-const handleAjouterAuPanier = (plat: typeof platsData[0]) => {
-  console.log("Plat ajouté au panier :", plat)
+const handleAjouterAuPanier = (plat) => {
+  store.addToPanier(plat)
   toastMessage.value = `${plat.nom} ajouté au panier !`
   toastVisible.value = true
   setTimeout(() => (toastVisible.value = false), 2000)
@@ -63,7 +57,6 @@ const platsList = platsData
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
 }
-
 
 .cheap-badge {
   background-color: #22c55e;

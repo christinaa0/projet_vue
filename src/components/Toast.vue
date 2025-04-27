@@ -1,39 +1,28 @@
-<!-- src/components/Toast.vue -->
 <template>
-    <div class="toast">
-      {{ message }}
-    </div>
-  </template>
-  
-  <script setup lang="ts">
-  const props = defineProps<{
-    message: string
-  }>()
-  </script>
-  
-  <style scoped>
-  .toast {
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    z-index: 1000;
-    animation: fadein 0.5s ease-out;
+  <div v-if="visible" class="toast">
+    {{ message }}
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    message: String,
+    visible: Boolean
   }
-  
-  @keyframes fadein {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  </style>
-  
+};
+</script>
+
+<style>
+.toast {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  opacity: 0.9;
+}
+</style>

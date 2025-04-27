@@ -12,11 +12,13 @@ import { RouterLink, RouterView } from 'vue-router'
       <li><RouterLink to="/">Accueil</RouterLink></li>
       <li><RouterLink to="/menu">Menu</RouterLink></li>
       <li><RouterLink to="/about">À propos</RouterLink></li>
+      <!-- Ajout du lien vers la page Panier -->
+      <li><RouterLink to="/panier">Panier</RouterLink></li>
     </ul>
   </header>
 
   <div class="main-title">
-
+    <!-- Titre principal ou autre contenu -->
   </div>
 
   <main class="main-content">

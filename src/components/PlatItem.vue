@@ -4,7 +4,7 @@
       <slot name="image">
         <img v-if="plat.imageUrl" :src="plat.imageUrl" alt="Image du plat" class="plat-img" />
       </slot>
-  
+
       <div class="plat-content">
         <h3>
           {{ plat.nom }}
@@ -12,10 +12,10 @@
         </h3>
         <p class="description">{{ plat.description }}</p>
         <p class="prix">{{ plat.prix.toFixed(2) }} €</p>
-  
+
         <!-- ✅ Slot extra pour un badge supplémentaire -->
         <slot name="extra"></slot>
-  
+
         <!-- ✅ Bouton stylisé -->
         <button class="btn-ajouter" @click="ajouterAuPanier">
           Ajouter au panier
@@ -23,7 +23,7 @@
       </div>
     </div>
   </template>
-  
+
   <script setup lang="ts">
   interface Plat {
     id: number;
@@ -33,20 +33,20 @@
     isNouveau: boolean;
     imageUrl?: string;  // Optionnel pour l'image
   }
-  
+
   const props = defineProps<{
     plat: Plat
   }>()
-  
+
   const emit = defineEmits<{
     (e: "ajouter-au-panier", plat: Plat): void
   }>()
-  
+
   const ajouterAuPanier = () => {
     emit("ajouter-au-panier", props.plat)
   }
   </script>
-  
+
   <style scoped>
   .plat-item {
     background-color: #fff;
@@ -62,19 +62,19 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid #e2e8f0;
   }
-  
+
   .plat-item:hover {
     transform: translateY(-6px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   }
-  
+
   .plat-content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
   }
-  
+
   h3 {
     font-size: 1.5rem;
     font-weight: 600;
@@ -84,7 +84,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  
+
   .badge {
     background-color: #f39c12;
     color: #fff;
@@ -94,7 +94,7 @@
     margin-left: 0.5rem;
     font-weight: 500;
   }
-  
+
   .description {
     font-size: 1rem;
     color: #4a4a4a;
@@ -104,14 +104,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  
+
   .prix {
     font-size: 1.25rem;
     color: #2ecc71;
     font-weight: 700;
     margin-top: 1rem;
   }
-  
+
   .btn-ajouter {
     background-color: #e74c3c;
     color: #fff;
@@ -126,11 +126,11 @@
     width: 100%;
     text-align: center;
   }
-  
+
   .btn-ajouter:hover {
     background-color: #c0392b;
   }
-  
+
   .plat-img {
     width: 100%;
     height: 180px;
@@ -138,7 +138,7 @@
     border-radius: 10px;
     margin-bottom: 1rem;
   }
-  
+
   /* ✅ Responsive pour les petites tailles d'écran */
   @media (max-width: 600px) {
     .plat-item {
@@ -146,10 +146,9 @@
       margin: 0 1rem 1rem 1rem;
       height: auto; /* Supprimer la hauteur fixe pour les petits écrans */
     }
-  
+
     .btn-ajouter {
       width: 100%;
     }
   }
   </style>
-  

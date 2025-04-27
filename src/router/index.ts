@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../pages/HomeView.vue'
-import MenuPage  from '@/pages/MenuPage.vue'
+import MenuPage from '@/pages/MenuPage.vue'
+import PanierPage from '@/pages/PanierPage.vue' // Assurez-vous que le chemin est correct pour PanierPage
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,6 +15,11 @@ const router = createRouter({
       path: '/menu',
       name: 'menu',
       component: MenuPage,
+    },
+    {
+      path: '/panier', // Nouvelle route pour la page panier
+      name: 'panier',
+      component: PanierPage, // Assurez-vous que le composant est correctement importé
     },
     {
       path: '/about',
