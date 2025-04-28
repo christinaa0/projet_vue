@@ -1,13 +1,21 @@
 <template>
+  <!-- Conteneur principal de l'application -->
   <div class="app">
+    <!-- Barre de navigation (fixed) -->
     <header class="navbar">
+      <!-- Logo de l'application -->
       <h1 class="logo-text">EPSEAT</h1>
+      
+      <!-- Menu de navigation -->
       <nav>
+        <!-- Icône du menu hamburger, visible sur mobile -->
         <div class="menu-toggle" @click="toggleMenu">
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
         </div>
+
+        <!-- Liste des liens de navigation, active si le menu est ouvert -->
         <ul class="nav-links" :class="{ 'active': isMenuOpen }">
           <li><RouterLink to="/">Accueil</RouterLink></li>
           <li><RouterLink to="/menu">Menu</RouterLink></li>
@@ -22,30 +30,36 @@
       </nav>
     </header>
 
+    <!-- Section principale qui charge le contenu selon la route -->
     <main class="app-content">
+      <!-- Cette balise affiche le contenu de la route actuelle -->
       <RouterView />
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
-import { ref } from 'vue';
+import { RouterLink } from 'vue-router'; // Importation de RouterLink pour la navigation
+import { ref } from 'vue'; // Importation de ref pour créer une variable réactive
 
+// Déclaration d'un état pour gérer l'ouverture/fermeture du menu hamburger
 const isMenuOpen = ref(false);
 
+// Fonction qui inverse l'état du menu (ouverture/fermeture)
 function toggleMenu() {
   isMenuOpen.value = !isMenuOpen.value;
 }
 </script>
 
 <style scoped>
+/* Conteneur principal de l'application */
 .app {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100vh; /* Prend toute la hauteur de l'écran */
 }
 
+/* Style de la barre de navigation */
 .navbar {
   position: fixed;
   top: 0;
@@ -55,19 +69,21 @@ function toggleMenu() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1f2937;
+  background-color: #1f2937; /* Couleur sombre */
   padding: 1rem 2rem;
   color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  z-index: 1000; /* Assure que la navbar reste au-dessus du contenu */
 }
 
+/* Style du logo */
 .logo-text {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #facc15;
+  color: #facc15; /* Couleur jaune */
 }
 
+/* Liste des liens de navigation */
 .nav-links {
   display: flex;
   gap: 1.5rem;
@@ -76,29 +92,32 @@ function toggleMenu() {
   padding: 0;
 }
 
+/* Liens de navigation */
 .nav-links a {
   color: white;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s;
+  transition: color 0.3s; /* Transition douce lors du survol */
 }
 
+/* Effet au survol des liens */
 .nav-links a:hover {
-  color: #facc15;
+  color: #facc15; /* Changement de couleur au survol */
 }
 
+/* Icône du panier */
 .panier-icon {
   width: 20px;
   height: 20px;
-  margin-right: 0.5rem;
+  margin-right: 0.5rem; /* Espace à droite de l'icône */
 }
 
-/* Menu hamburger */
+/* Menu hamburger (affiché uniquement sur mobile) */
 .menu-toggle {
-  display: none;
+  display: none; /* Par défaut, il est caché */
   flex-direction: column;
   gap: 4px;
-  cursor: pointer;
+  cursor: pointer; /* Change le curseur pour montrer que c'est cliquable */
 }
 
 .menu-toggle .bar {
@@ -108,13 +127,15 @@ function toggleMenu() {
   border-radius: 5px;
 }
 
+/* Styles spécifiques aux petits écrans (mobile) */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
+    flex-direction: column; /* Alignement en colonne */
     align-items: flex-start;
     padding: 1rem;
   }
 
+  /* Menu de navigation caché par défaut sur mobile */
   .nav-links {
     display: none;
     flex-direction: column;
@@ -125,6 +146,7 @@ function toggleMenu() {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
+  /* Menu actif (affiché) sur mobile */
   .nav-links.active {
     display: flex;
   }
@@ -137,15 +159,15 @@ function toggleMenu() {
   }
 
   .menu-toggle {
-    display: flex;
+    display: flex; /* Affichage du menu hamburger */
   }
 
   .app-content {
-    padding-top: 5rem;
+    padding-top: 5rem; /* Espace en haut pour éviter que le contenu soit caché par la navbar */
   }
 }
 
-/* Version Desktop */
+/* Version Desktop (écrans larges) */
 @media (min-width: 769px) {
   .navbar {
     flex-direction: row;
@@ -164,11 +186,11 @@ function toggleMenu() {
   }
 
   .menu-toggle {
-    display: none;
+    display: none; /* Masque le menu hamburger sur desktop */
   }
 
   .app-content {
-    padding-top: 6rem; /* Ajout de l'espace en haut du contenu */
+    padding-top: 6rem; /* Espace en haut pour le contenu */
   }
 }
 </style>
