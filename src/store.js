@@ -2,10 +2,9 @@ import { reactive } from 'vue';
 
 const state = reactive({
   panier: [],
-  commandes: [] // Liste des commandes
+  commandes: [] 
 });
 
-// Ajouter un plat au panier
 const addToPanier = (plat) => {
   const existingPlat = state.panier.find(item => item.id === plat.id);
   if (existingPlat) {
@@ -15,12 +14,10 @@ const addToPanier = (plat) => {
   }
 };
 
-// Supprimer un plat du panier
 const removeFromPanier = (id) => {
   state.panier = state.panier.filter(item => item.id !== id);
 };
 
-// Changer la quantité d'un plat dans le panier
 const changeQuantity = (id, quantity) => {
   const plat = state.panier.find(item => item.id === id);
   if (plat) {
@@ -28,7 +25,7 @@ const changeQuantity = (id, quantity) => {
   }
 };
 
-// Finaliser la commande : transférer le panier dans les commandes
+
 const finalizeCommande = () => {
   if (state.panier.length > 0) {
     const newCommande = state.panier.map(item => ({
@@ -36,12 +33,12 @@ const finalizeCommande = () => {
       status: 'En cours',
       total: item.prix * item.quantity
     }));
-    state.commandes.push(...newCommande); // Ajouter les plats comme commandes
-    state.panier = []; // Vider le panier après la commande
+    state.commandes.push(...newCommande); 
+    state.panier = []; 
   }
 };
 
-// Marquer une commande comme prête
+
 const marquerCommandeCommePret = (id) => {
   const commande = state.commandes.find(c => c.id === id);
   if (commande) {
@@ -49,7 +46,7 @@ const marquerCommandeCommePret = (id) => {
   }
 };
 
-// Obtenir le total du panier
+
 const getTotal = () => {
   return state.panier.reduce((total, plat) => total + plat.prix * plat.quantity, 0);
 };

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../pages/HomeView.vue'
 import MenuPage from '@/pages/MenuPage.vue'
-import PanierPage from '@/pages/PanierPage.vue' // Assurez-vous que le chemin est correct pour PanierPage
+import PanierPage from '@/pages/PanierPage.vue' 
 import AdminPage from '@/pages/AdminPage.vue';
 
 const router = createRouter({
@@ -18,9 +18,9 @@ const router = createRouter({
       component: MenuPage,
     },
     {
-      path: '/panier', // Nouvelle route pour la page panier
+      path: '/panier', 
       name: 'panier',
-      component: PanierPage, // Assurez-vous que le composant est correctement importé
+      component: PanierPage, 
     },
     {
       path: '/about',
