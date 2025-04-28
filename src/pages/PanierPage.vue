@@ -27,12 +27,26 @@
     <div v-else>
       <p>Votre panier est vide.</p>
     </div>
+
+    <!-- Confirmation Pop-up -->
+    <div v-if="showPopup" class="popup">
+      <div class="popup-content">
+        <p>Commande validée ! Voulez-vous vraiment finaliser votre commande ?</p>
+        <button @click="confirmOrder">OK</button>
+        <button @click="cancelOrder">Annuler</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import store from '@/store';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const showPopup = ref(false); // Contrôle du pop-up
+const router = useRouter();
 
 const removeFromPanier = (id: number) => {
   store.removeFromPanier(id);
@@ -43,13 +57,26 @@ const updateQuantity = (id: number, quantity: number) => {
 };
 
 const finalizeOrder = () => {
-  if (window.confirm("Commande validée ! Voulez-vous vraiment finaliser votre commande ?")) {
-    store.clearPanier();
-  }
+  // Afficher le pop-up pour confirmer la finalisation de la commande
+  showPopup.value = true;
+};
+
+const confirmOrder = () => {
+  // Finaliser la commande dans le store et vider le panier
+  store.finalizeCommande();
+  showPopup.value = false;
+  
+  // Rediriger vers la page Admin ou rafraîchir l'interface
+  router.push('/admin'); // Redirection vers la page Admin après confirmation
+};
+
+const cancelOrder = () => {
+  showPopup.value = false; // Fermer le pop-up sans action
 };
 </script>
 
 <style scoped>
+<<<<<<< HEAD
 .panier-page {
   padding: 2rem;
   background-color: #f9fafb;
@@ -59,11 +86,30 @@ const finalizeOrder = () => {
 .panier-page h1 {
   font-size: 2rem;
   margin-bottom: 2rem;
-  text-align: center;
-  color: #333;
-  font-weight: bold;
+=======
+/* Pop-up */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
+.popup-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+>>>>>>> 8ad71a9071dc946a9774e888dd93fc3fe71cd0c6
+  text-align: center;
+}
+
+<<<<<<< HEAD
 .panier-item {
   display: flex;
   justify-content: space-between;
@@ -158,13 +204,30 @@ input[type="number"]:focus {
   padding: 0.8rem 1.5rem;
   font-size: 1.2rem;
   border-radius: 8px;
+=======
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 0.5rem 1rem;
+>>>>>>> 8ad71a9071dc946a9774e888dd93fc3fe71cd0c6
   border: none;
-  width: 100%;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-.finalize-btn:hover {
-  background-color: #388e3c;
+button:hover {
+  background-color: #45a049;
 }
+<<<<<<< HEAD
+=======
+
+button:last-child {
+  background-color: #f44336;
+}
+
+button:last-child:hover {
+  background-color: #d32f2f;
+}
+>>>>>>> 8ad71a9071dc946a9774e888dd93fc3fe71cd0c6
 </style>
