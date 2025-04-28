@@ -26,11 +26,25 @@
         <p>Votre panier est vide.</p>
       </div>
     </div>
+
+    <!-- Confirmation Pop-up -->
+    <div v-if="showPopup" class="popup">
+      <div class="popup-content">
+        <p>Commande validée ! Voulez-vous vraiment finaliser votre commande ?</p>
+        <button @click="confirmOrder">OK</button>
+        <button @click="cancelOrder">Annuler</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import store from '@/store';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const showPopup = ref(false); // Contrôle du pop-up
+const router = useRouter();
 
 const removeFromPanier = (id: number) => {
   store.removeFromPanier(id);
@@ -41,150 +55,65 @@ const updateQuantity = (id: number, quantity: number) => {
 };
 
 const finalizeOrder = () => {
-  if (window.confirm("Commande validée ! Voulez-vous vraiment finaliser votre commande ?")) {
-    store.clearPanier();
-  }
+  // Afficher le pop-up pour confirmer la finalisation de la commande
+  showPopup.value = true;
+};
+
+const confirmOrder = () => {
+  // Finaliser la commande dans le store et vider le panier
+  store.finalizeCommande();
+  showPopup.value = false;
+  
+  // Rediriger vers la page Admin ou rafraîchir l'interface
+  router.push('/admin'); // Redirection vers la page Admin après confirmation
+};
+
+const cancelOrder = () => {
+  showPopup.value = false; // Fermer le pop-up sans action
 };
 </script>
 
 <style scoped>
-.panier-page {
-  min-height: 100vh;
+/* Pop-up */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding-top: 6rem;
-  background-color: #f9fafb;
-  font-family: 'Arial', sans-serif;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
-.panier-container {
-  width: 100%;
-  max-width: 900px;
+.popup-content {
+  background-color: white;
   padding: 2rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  border-radius: 8px;
   text-align: center;
-  color: #333;
-  font-weight: bold;
 }
 
-.panier-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fefefe;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  flex-wrap: wrap;
-}
-
-.item-left {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.item-name {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
-}
-
-.item-price {
-  color: #777;
-  font-size: 1rem;
-  margin: 0.5rem 0;
-}
-
-.item-quantity {
-  display: flex;
-  align-items: center;
-  margin-top: 0.5rem;
-}
-
-.item-quantity label {
-  font-size: 0.9rem;
-  margin-right: 0.5rem;
-}
-
-input[type="number"] {
-  width: 70px;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  outline: none;
-}
-
-input[type="number"]:focus {
-  border-color: #4CAF50;
-}
-
-.remove-btn {
-  background-color: #f44336;
-  color: white;
-  padding: 0.5rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 0.5rem;
-}
-
-.remove-btn:hover {
-  background-color: #d32f2f;
-}
-
-.total {
-  margin-top: 1rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: right;
-}
-
-.finalize-btn {
+button {
   background-color: #4CAF50;
   color: white;
-  padding: 1rem 1.5rem;
-  font-size: 1.2rem;
-  border-radius: 8px;
+  padding: 0.5rem 1rem;
   border: none;
-  width: 100%;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-top: 2rem;
 }
 
-.finalize-btn:hover {
-  background-color: #388e3c;
+button:hover {
+  background-color: #45a049;
 }
 
-@media (max-width: 768px) {
-  .panier-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+button:last-child {
+  background-color: #f44336;
+}
 
-  .remove-btn {
-    width: 100%;
-    margin-top: 1rem;
-  }
-
-  .total {
-    text-align: center;
-  }
-
-  .finalize-btn {
-    font-size: 1rem;
-  }
+button:last-child:hover {
+  background-color: #d32f2f;
 }
 </style>

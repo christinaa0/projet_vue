@@ -3,7 +3,12 @@
     <header class="navbar">
       <h1 class="logo-text">EPSEAT</h1>
       <nav>
-        <ul class="nav-links">
+        <div class="menu-toggle" @click="toggleMenu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <ul class="nav-links" :class="{ 'active': isMenuOpen }">
           <li><RouterLink to="/">Accueil</RouterLink></li>
           <li><RouterLink to="/menu">Menu</RouterLink></li>
           <li><RouterLink to="/about">À propos</RouterLink></li>
@@ -11,6 +16,8 @@
             <img src="@/assets/acheter.png" alt="Panier" class="panier-icon" />
             Panier
           </RouterLink></li>
+          <!-- Lien vers la page admin -->
+          <li><RouterLink to="/admin">Admin</RouterLink></li>
         </ul>
       </nav>
     </header>
@@ -22,7 +29,14 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router';
+import { ref } from 'vue';
+
+const isMenuOpen = ref(false);
+
+function toggleMenu() {
+  isMenuOpen.value = !isMenuOpen.value;
+}
 </script>
 
 <style scoped>
@@ -79,39 +93,82 @@ import { RouterLink } from 'vue-router'
   margin-right: 0.5rem;
 }
 
+/* Menu hamburger */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.menu-toggle .bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 5px;
+}
+
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
+    padding: 1rem;
   }
 
   .nav-links {
+    display: none;
     flex-direction: column;
     width: 100%;
     margin-top: 1rem;
+    padding: 0;
+    background-color: #1f2937;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.active {
+    display: flex;
   }
 
   .nav-links a {
     display: block;
     padding: 0.5rem 0;
+    text-align: left;
+    border-bottom: 1px solid #3b4c61;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .app-content {
+    padding-top: 5rem;
   }
 }
 
-.app-content {
-  padding-top: 4rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 4rem);
-  width: 100%;
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
+/* Version Desktop */
+@media (min-width: 769px) {
+  .navbar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-@media (max-width: 768px) {
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .nav-links a {
+    padding: 0.5rem 1rem;
+    text-align: center;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
   .app-content {
-    padding-top: 6rem;
+    padding-top: 6rem; /* Ajout de l'espace en haut du contenu */
   }
 }
 </style>
